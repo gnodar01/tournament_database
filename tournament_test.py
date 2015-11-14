@@ -129,7 +129,7 @@ if __name__ == '__main__':
     testDeleteMatches()
     testDelete()
     testCount()
-    # testRegister()
+    testRegister()
     # testRegisterCountDelete()
     # testStandingsBeforeMatches()
     # testReportMatches()
