@@ -70,7 +70,7 @@ def playerStandings():
     """
     conn = connect()
     c = conn.cursor()
-    c.execute("SELECT * FROM win_loss;")
+    c.execute("SELECT player_id, player_name, num_wins, num_rounds FROM win_loss;")
     rows = c.fetchall()
     conn.close()
     return rows
