@@ -34,7 +34,6 @@ def countPlayers():
     c = conn.cursor()
     c.execute("SELECT COUNT(*) AS num_players FROM players;")
     rows = c.fetchall()[0][0]
-    conn.commit()
     conn.close()
     return rows
 
@@ -69,7 +68,12 @@ def playerStandings():
         wins: the number of matches the player has won
         matches: the number of matches the player has played
     """
-
+    conn = connect()
+    c = conn.cursor()
+    c.execute("SELECT * FROM win_loss;")
+    rows = c.fetchall()
+    conn.close()
+    return rows
 
 def reportMatch(winner, loser):
     """Records the outcome of a single match between two players.
