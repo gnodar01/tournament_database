@@ -1,9 +1,7 @@
 -- TABLE definitions for the tournament project.
 
 DROP DATABASE IF EXISTS tournament;
-
 CREATE DATABASE tournament;
-
 \c tournament;
 
 -- TABLE of players:
@@ -12,6 +10,7 @@ CREATE TABLE players
 	(player_id SERIAL PRIMARY KEY,
 	 player_name TEXT);
 
+
 -- TABLE of matches played:
 --  includes the id of the match, id of the winner of the match (from players table),
 --  id of the loser of the match, and the number of the current round
@@ -19,6 +18,7 @@ CREATE TABLE matches
 	(match_id SERIAL PRIMARY KEY,
 	 winner_id INTEGER REFERENCES players(player_id),
 	 loser_id INTEGER REFERENCES players(player_id));
+
 
 -- Example VALUES to populate the database with 8 players and 16 matches ++++++++++++++++
 
@@ -50,11 +50,11 @@ CREATE TABLE matches
 
 -- End of example VALUES ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+
 -- VIEW of the wins/losses record and the number of rounds for each player:
 --  displays id for each player, each player's name,
 --  number of wins for each player, number of losses for each player,
 --  and the number of rounds each player has participated in
-
 CREATE VIEW win_loss AS
 	SELECT wins.player_id, wins.player_name, wins.num_wins, losses.num_losses,
 	(wins.num_wins + losses.num_losses) AS num_rounds
@@ -72,7 +72,9 @@ CREATE VIEW win_loss AS
 		ON (wins.player_id = losses.player_id)
 		ORDER BY num_wins DESC;
 
+
 -- Show all relevant TABLES and VIEWS
-SELECT * FROM players;
-SELECT * FROM matches;
-SELECT * FROM win_loss;
+-- SELECT * FROM players;
+-- SELECT * FROM matches;
+-- SELECT * FROM win_loss;
+
