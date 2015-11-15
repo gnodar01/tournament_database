@@ -71,7 +71,8 @@ CREATE VIEW win_loss AS
 					FROM players LEFT JOIN matches
 						ON (matches.loser_id = players.player_id)
 							GROUP BY players.player_id) as losses
-		ON (wins.player = losses.player);
+		ON (wins.player = losses.player)
+		ORDER BY num_wins DESC;
 
 -- Show all relevant TABLES and VIEWS
 SELECT * FROM players;
