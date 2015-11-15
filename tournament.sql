@@ -18,8 +18,7 @@ CREATE TABLE players
 CREATE TABLE matches
 	(match_id SERIAL PRIMARY KEY,
 	 winner_id INTEGER REFERENCES players(player_id),
-	 loser_id INTEGER REFERENCES players(player_id),
-	 round INTEGER);
+	 loser_id INTEGER REFERENCES players(player_id));
 
 -- Example VALUES to populate the database with 8 players and 16 matches ++++++++++++++++
 
