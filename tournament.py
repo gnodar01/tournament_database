@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # 
 # tournament.py -- implementation of a Swiss-system tournament
-#
 
 import psycopg2
 
@@ -28,6 +27,7 @@ def deletePlayers():
     conn.commit()
     conn.close()
 
+
 def countPlayers():
     """Returns the number of players currently registered."""
     conn = connect()
@@ -36,6 +36,7 @@ def countPlayers():
     rows = c.fetchall()[0][0]
     conn.close()
     return rows
+
 
 def registerPlayer(name):
     """Adds a player to the tournament database.
@@ -75,6 +76,7 @@ def playerStandings():
     conn.close()
     return rows
 
+
 def reportMatch(winner, loser):
     """Records the outcome of a single match between two players.
 
@@ -89,6 +91,7 @@ def reportMatch(winner, loser):
     c.execute(SQL, data)
     conn.commit()
     conn.close()
+
  
 def swissPairings():
     """Returns a list of pairs of players for the next round of a match.
@@ -105,5 +108,15 @@ def swissPairings():
         id2: the second player's unique id
         name2: the second player's name
     """
-
+    conn = connect()
+    c = conn.cursor()
+    c.execute("SELECT player_id, player_name FROM win_loss;")
+    rows = []
+    while True:
+        pairing = c.fetchmany(2)
+        if len(pairing) == 0:
+            break
+        rows.append(pairing[0] + pairing[1])
+    conn.close()
+    return rows
 
