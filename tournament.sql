@@ -9,16 +9,16 @@ CREATE DATABASE tournament;
 -- TABLE of players:
 --  includes id for each player (auto generated) and the player's name
 CREATE TABLE players
-	(id SERIAL PRIMARY KEY,
+	(player_id SERIAL PRIMARY KEY,
 	 player_name TEXT);
 
 -- TABLE of matches played:
---  includes ids for each player in each match (from players table),
---  the number of the current round, and the id of the winning player
+--  includes the id of the match, id of the winner of the match (from players table),
+--  id of the loser of the match, and the number of the current round
 CREATE TABLE matches
 	(match_id SERIAL PRIMARY KEY,
-	 winner_id INTEGER REFERENCES players(id),
-	 loser_id INTEGER REFERENCES players(id),
+	 winner_id INTEGER REFERENCES players(player_id),
+	 loser_id INTEGER REFERENCES players(player_id),
 	 round INTEGER);
 
 -- Example VALUES to populate the database with 8 players and 16 matches ++++++++++++++++
@@ -51,26 +51,26 @@ INSERT INTO matches (winner_id, loser_id, round) VALUES (7,8,4);
 
 -- End of example VALUES ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
--- VIEW of wins showing wins per player:
+-- VIEW of the wins/losses record and the number of rounds for each player:
 --  displays id for each player, each player's name,
---  and number of wins for each player. This VIEW is used to create the win_loss VIEW
---  (below) and to calculate the overall winner(s) VIEW (below)
+--  number of wins for each player, number of losses for each player,
+--  and the number of rounds each player has participated in
 
 CREATE VIEW win_loss AS
 	SELECT wins.player, wins.player_name, wins.num_wins, losses.num_losses,
 	(wins.num_wins + losses.num_losses) AS num_rounds
 		From
-			(SELECT players.id AS player, players.player_name,
+			(SELECT players.player_id AS player, players.player_name,
 				COUNT(matches.winner_id) as num_wins
 					FROM players LEFT JOIN matches
-						ON (matches.winner_id = players.id)
-							GROUP BY players.id) as wins 
+						ON (matches.winner_id = players.player_id)
+							GROUP BY players.player_id) as wins 
 		INNER JOIN
-			(SELECT players.id AS player, players.player_name,
+			(SELECT players.player_id AS player, players.player_name,
 				COUNT(matches.loser_id) as num_losses
 					FROM players LEFT JOIN matches
-						ON (matches.loser_id = players.id)
-							GROUP BY players.id) as losses
+						ON (matches.loser_id = players.player_id)
+							GROUP BY players.player_id) as losses
 		ON (wins.player = losses.player);
 
 -- Show all relevant TABLES and VIEWS
