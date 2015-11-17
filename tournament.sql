@@ -1,5 +1,11 @@
 -- TABLE definitions for the tournament project.
 
+-- Drop existing connections to 'tournament' database
+SELECT pg_terminate_backend(pg_stat_activity.pid)
+FROM pg_stat_activity
+WHERE pg_stat_activity.datname = 'TARGET_DB'
+  AND pid <> pg_backend_pid();
+
 DROP DATABASE IF EXISTS tournament;
 CREATE DATABASE tournament;
 \c tournament;
