@@ -17,7 +17,8 @@ CREATE TABLE players
 CREATE TABLE matches
 	(match_id SERIAL PRIMARY KEY,
 	 winner_id INTEGER REFERENCES players(player_id) ON DELETE CASCADE,
-	 loser_id INTEGER REFERENCES players(player_id) ON DELETE CASCADE);
+	 loser_id INTEGER REFERENCES players(player_id) ON DELETE CASCADE,
+	 CHECK (winner_id <> loser_id));
 
 
 -- Example VALUES to populate the database with 8 players and 16 matches ++++++++++++++++
