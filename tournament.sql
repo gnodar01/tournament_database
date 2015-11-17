@@ -8,7 +8,7 @@ CREATE DATABASE tournament;
 --  includes id for each player (auto generated) and the player's name
 CREATE TABLE players
 	(player_id SERIAL PRIMARY KEY,
-	 player_name TEXT);
+	 player_name TEXT NOT NULL);
 
 
 -- TABLE of matches played:
@@ -16,37 +16,37 @@ CREATE TABLE players
 --  id of the loser of the match, and the number of the current round
 CREATE TABLE matches
 	(match_id SERIAL PRIMARY KEY,
-	 winner_id INTEGER REFERENCES players(player_id),
-	 loser_id INTEGER REFERENCES players(player_id));
+	 winner_id INTEGER REFERENCES players(player_id) ON DELETE CASCADE,
+	 loser_id INTEGER REFERENCES players(player_id) ON DELETE CASCADE);
 
 
 -- Example VALUES to populate the database with 8 players and 16 matches ++++++++++++++++
 
--- INSERT INTO players (player_name) VALUES ('John Hancock');
--- INSERT INTO players (player_name) VALUES ('Betty Lu');
--- INSERT INTO players (player_name) VALUES ('Don Kong');
--- INSERT INTO players (player_name) VALUES ('Bobba Fett');
--- INSERT INTO players (player_name) VALUES ('Yan Dan');
--- INSERT INTO players (player_name) VALUES ('Kekei Genkai');
--- INSERT INTO players (player_name) VALUES ('Tororo Ichiban');
--- INSERT INTO players (player_name) VALUES ('Squee McGee');
+INSERT INTO players (player_name) VALUES ('John Hancock');
+INSERT INTO players (player_name) VALUES ('Betty Lu');
+INSERT INTO players (player_name) VALUES ('Don Kong');
+INSERT INTO players (player_name) VALUES ('Bobba Fett');
+INSERT INTO players (player_name) VALUES ('Yan Dan');
+INSERT INTO players (player_name) VALUES ('Kekei Genkai');
+INSERT INTO players (player_name) VALUES ('Tororo Ichiban');
+INSERT INTO players (player_name) VALUES ('Squee McGee');
 
--- INSERT INTO matches (winner_id, loser_id) VALUES (1,2);
--- INSERT INTO matches (winner_id, loser_id) VALUES (3,4);
--- INSERT INTO matches (winner_id, loser_id) VALUES (5,6);
--- INSERT INTO matches (winner_id, loser_id) VALUES (7,8);
--- INSERT INTO matches (winner_id, loser_id) VALUES (1,3);
--- INSERT INTO matches (winner_id, loser_id) VALUES (5,7);
--- INSERT INTO matches (winner_id, loser_id) VALUES (2,4);
--- INSERT INTO matches (winner_id, loser_id) VALUES (6,8);
--- INSERT INTO matches (winner_id, loser_id) VALUES (1,5);
--- INSERT INTO matches (winner_id, loser_id) VALUES (2,3);
--- INSERT INTO matches (winner_id, loser_id) VALUES (6,7);
--- INSERT INTO matches (winner_id, loser_id) VALUES (4,8);
--- INSERT INTO matches (winner_id, loser_id) VALUES (1,2);
--- INSERT INTO matches (winner_id, loser_id) VALUES (5,6);
--- INSERT INTO matches (winner_id, loser_id) VALUES (3,4);
--- INSERT INTO matches (winner_id, loser_id) VALUES (7,8);
+INSERT INTO matches (winner_id, loser_id) VALUES (1,2);
+INSERT INTO matches (winner_id, loser_id) VALUES (3,4);
+INSERT INTO matches (winner_id, loser_id) VALUES (5,6);
+INSERT INTO matches (winner_id, loser_id) VALUES (7,8);
+INSERT INTO matches (winner_id, loser_id) VALUES (1,3);
+INSERT INTO matches (winner_id, loser_id) VALUES (5,7);
+INSERT INTO matches (winner_id, loser_id) VALUES (2,4);
+INSERT INTO matches (winner_id, loser_id) VALUES (6,8);
+INSERT INTO matches (winner_id, loser_id) VALUES (1,5);
+INSERT INTO matches (winner_id, loser_id) VALUES (2,3);
+INSERT INTO matches (winner_id, loser_id) VALUES (6,7);
+INSERT INTO matches (winner_id, loser_id) VALUES (4,8);
+INSERT INTO matches (winner_id, loser_id) VALUES (1,2);
+INSERT INTO matches (winner_id, loser_id) VALUES (5,6);
+INSERT INTO matches (winner_id, loser_id) VALUES (3,4);
+INSERT INTO matches (winner_id, loser_id) VALUES (7,8);
 
 -- End of example VALUES ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -74,7 +74,7 @@ CREATE VIEW win_loss AS
 
 
 -- Show all relevant TABLES and VIEWS
--- SELECT * FROM players;
--- SELECT * FROM matches;
--- SELECT * FROM win_loss;
+SELECT * FROM players;
+SELECT * FROM matches;
+SELECT * FROM win_loss;
 
