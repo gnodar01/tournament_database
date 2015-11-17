@@ -38,9 +38,8 @@ def countPlayers():
     conn, c = connect()
     SQL = "SELECT COUNT(*) AS num_players FROM players;"
     c.execute(SQL)
-    rows = c.fetchall()[0][0]
-    conn.close()
-    return rows
+    row = c.fetchone()
+    return row[0]
 
 
 def registerPlayer(name):
