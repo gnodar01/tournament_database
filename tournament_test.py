@@ -135,4 +135,7 @@ if __name__ == '__main__':
     testStandingsBeforeMatches()
     testReportMatches()
     testPairings()
+# Test uneven pairings:
+    registerPlayer("Pinkie Pie")
+    print swissPairings();
     print "Success!  All tests pass!"

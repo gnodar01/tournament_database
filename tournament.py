@@ -108,14 +108,21 @@ def swissPairings():
         id2: the second player's unique id
         name2: the second player's name
     """
-    conn, c = connect()
-    SQL = "SELECT player_id, player_name FROM win_loss;"
-    c.execute(SQL)
-    rows = []
-    while True:
-        pairing = c.fetchmany(2)
-        if len(pairing) == 0:
-            break
-        rows.append(pairing[0] + pairing[1])
-    conn.close()
-    return rows
+    try:
+        numPlayers = countPlayers()
+        if numPlayers % 2 == 0:
+            conn, c = connect()
+            SQL = "SELECT player_id, player_name FROM win_loss;"
+            c.execute(SQL)
+            rows = []
+            while True:
+                pairing = c.fetchmany(2)
+                if len(pairing) == 0:
+                    break
+                rows.append(pairing[0] + pairing[1])
+            conn.close()
+            return rows
+        raise Exception(numPlayers)
+    except:
+        print ("<error - uneven number of players registered:"
+               " %s players registered>" % numPlayers)
