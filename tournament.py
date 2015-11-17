@@ -7,13 +7,17 @@ import psycopg2
 
 def connect():
     """Connect to the PostgreSQL database.  Returns a database connection."""
-    return psycopg2.connect("dbname=tournament")
+    try:
+        conn = psycopg2.connect("dbname=tournament")
+        c = conn.cursor()
+        return conn, c
+    except:
+        print("<error - failed to connect>")
 
 
 def deleteMatches():
     """Remove all the match records from the database."""
-    conn = connect()
-    c = conn.cursor()
+    conn, c = connect()
     SQL = "DELETE FROM matches *;"
     c.execute(SQL)
     conn.commit()
@@ -22,8 +26,7 @@ def deleteMatches():
 
 def deletePlayers():
     """Remove all the player records from the database."""
-    conn = connect()
-    c = conn.cursor()
+    conn, c = connect()
     SQL = "DELETE FROM players *;"
     c.execute(SQL)
     conn.commit()
@@ -32,8 +35,7 @@ def deletePlayers():
 
 def countPlayers():
     """Returns the number of players currently registered."""
-    conn = connect()
-    c = conn.cursor()
+    conn, c = connect()
     SQL = "SELECT COUNT(*) AS num_players FROM players;"
     c.execute(SQL)
     rows = c.fetchall()[0][0]
@@ -48,8 +50,7 @@ def registerPlayer(name):
     Args:
       name: the player's full name (need not be unique).
     """
-    conn = connect()
-    c = conn.cursor()
+    conn, c = connect()
     SQL = "INSERT INTO players (player_name) VALUES (%s);"
     data = (name, )
     c.execute(SQL, data)
@@ -70,8 +71,7 @@ def playerStandings():
         wins: the number of matches the player has won
         matches: the number of matches the player has played
     """
-    conn = connect()
-    c = conn.cursor()
+    conn, c = connect()
     SQL = "SELECT player_id, player_name, num_wins, num_rounds FROM win_loss;"
     c.execute(SQL)
     rows = c.fetchall()
@@ -86,8 +86,7 @@ def reportMatch(winner, loser):
       winner:  the id number of the player who won
       loser:  the id number of the player who lost
     """
-    conn = connect()
-    c = conn.cursor()
+    conn, c = connect()
     SQL = "INSERT INTO matches (winner_id, loser_id) VALUES (%s, %s);"
     data = (winner, loser)
     c.execute(SQL, data)
@@ -110,8 +109,7 @@ def swissPairings():
         id2: the second player's unique id
         name2: the second player's name
     """
-    conn = connect()
-    c = conn.cursor()
+    conn, c = connect()
     SQL = "SELECT player_id, player_name FROM win_loss;"
     c.execute(SQL)
     rows = []
