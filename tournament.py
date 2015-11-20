@@ -101,6 +101,8 @@ def swissPairings():
     player with an equal or nearly-equal win record, that is, a player adjacent
     to him or her in the standings.
 
+    An uneven number of players registered will raise an exception.
+
     Returns:
       A list of tuples, each of which contains (id1, name1, id2, name2)
         id1: the first player's unique id
@@ -108,21 +110,18 @@ def swissPairings():
         id2: the second player's unique id
         name2: the second player's name
     """
-    try:
-        numPlayers = countPlayers()
-        if numPlayers % 2 == 0:
-            conn, c = connect()
-            SQL = "SELECT player_id, player_name FROM win_loss;"
-            c.execute(SQL)
-            rows = []
-            while True:
-                pairing = c.fetchmany(2)
-                if len(pairing) == 0:
-                    break
-                rows.append(pairing[0] + pairing[1])
-            conn.close()
-            return rows
-        raise Exception(numPlayers)
-    except:
-        print ("<error - uneven number of players registered:"
+    numPlayers = countPlayers()
+    if numPlayers % 2 == 0:
+        conn, c = connect()
+        SQL = "SELECT player_id, player_name FROM win_loss;"
+        c.execute(SQL)
+        rows = []
+        while True:
+            pairing = c.fetchmany(2)
+            if len(pairing) == 0:
+                break
+            rows.append(pairing[0] + pairing[1])
+        conn.close()
+        return rows
+    raise ValueError("<error - uneven number of players registered:"
                " %s players registered>" % numPlayers)
