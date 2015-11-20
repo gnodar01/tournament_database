@@ -101,8 +101,6 @@ def swissPairings():
     player with an equal or nearly-equal win record, that is, a player adjacent
     to him or her in the standings.
 
-    An uneven number of players registered will raise an exception.
-
     Returns:
       A list of tuples, each of which contains (id1, name1, id2, name2)
         id1: the first player's unique id
@@ -110,18 +108,32 @@ def swissPairings():
         id2: the second player's unique id
         name2: the second player's name
     """
-    numPlayers = countPlayers()
-    if numPlayers % 2 == 0:
-        conn, c = connect()
-        SQL = "SELECT player_id, player_name FROM win_loss;"
-        c.execute(SQL)
-        rows = []
-        while True:
-            pairing = c.fetchmany(2)
-            if len(pairing) == 0:
-                break
-            rows.append(pairing[0] + pairing[1])
-        conn.close()
-        return rows
-    raise ValueError("<error - uneven number of players registered:"
-               " %s players registered>" % numPlayers)
+    conn, c = connect()
+    SQL = "SELECT player_id, player_name FROM win_loss;"
+    c.execute(SQL)
+    rows = []
+    while True:
+        pairing = c.fetchmany(2)
+        if len(pairing) == 0:
+            break
+        rows.append(pairing[0] + pairing[1])
+    conn.close()
+    return rows
+
+def checkDuplicate(player1, player2):
+    conn, c = connect()
+    SQL = """SELECT SUM(num)
+                FROM
+                    (SELECT match_id, winner_id, loser_id, COUNT(*) AS num
+                        FROM matches
+                            WHERE (winner_id = %s AND loser_id = %s)
+                               OR (winner_id = %s AND loser_id = %s)
+                    GROUP BY match_id) AS duplicates;"""
+    data = (player1, player2, player2, player1)
+    c.execute(SQL, data)
+    row = c.fetchone()
+    if row > 0:
+        raise ValueError("These players have already been matched up")
+
+print checkDuplicate(414,417)
+
