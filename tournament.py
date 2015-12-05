@@ -117,7 +117,9 @@ def swissPairings():
     i = 0
     j = 1
     while len(rows) > 0:
-        print rows, i, j
+        if j >= len(rows):
+            raise Exception('Cannot assign pairings. ' +
+                            '2 or more players have already been matched together')
         player1 = rows[i][0]
         player2 = rows[j][0]
         if checkDuplicates(player1, player2):
@@ -125,8 +127,8 @@ def swissPairings():
         else:
             pairings.append( rows.pop(i) + rows.pop(j - 1) )
             j = 1
-    # print pairings
-    # print rows
+    print pairings
+    print rows
     conn.close()
     return rows
 

@@ -2,11 +2,13 @@
 
 -- Drop existing connections to 'tournament' database
 SELECT pg_terminate_backend(pg_stat_activity.pid)
-FROM pg_stat_activity
-WHERE pg_stat_activity.datname = 'TARGET_DB'
-  AND pid <> pg_backend_pid();
+	FROM pg_stat_activity
+		WHERE pg_stat_activity.datname = 'TARGET_DB'
+  		AND pid <> pg_backend_pid();
 
 DROP DATABASE IF EXISTS tournament;
+
+-- Create tournament database and connect
 CREATE DATABASE tournament;
 \c tournament;
 
@@ -44,17 +46,22 @@ INSERT INTO matches (winner_id, loser_id) VALUES (5,6);
 INSERT INTO matches (winner_id, loser_id) VALUES (7,8);
 INSERT INTO matches (winner_id, loser_id) VALUES (1,3);
 INSERT INTO matches (winner_id, loser_id) VALUES (5,7);
-INSERT INTO matches (winner_id, loser_id) VALUES (2,4);
-INSERT INTO matches (winner_id, loser_id) VALUES (6,8);
+INSERT INTO matches (winner_id, loser_id) VALUES (8,2);
+INSERT INTO matches (winner_id, loser_id) VALUES (6,4);
 INSERT INTO matches (winner_id, loser_id) VALUES (1,5);
-INSERT INTO matches (winner_id, loser_id) VALUES (2,3);
+INSERT INTO matches (winner_id, loser_id) VALUES (3,8);
 INSERT INTO matches (winner_id, loser_id) VALUES (6,7);
-INSERT INTO matches (winner_id, loser_id) VALUES (4,8);
--- INSERT INTO matches (winner_id, loser_id) VALUES (1,2);
--- INSERT INTO matches (winner_id, loser_id) VALUES (5,6);
--- INSERT INTO matches (winner_id, loser_id) VALUES (3,4);
--- INSERT INTO matches (winner_id, loser_id) VALUES (7,8);
-
+INSERT INTO matches (winner_id, loser_id) VALUES (4,2);
+-- This is where it normally would end---------------------------------------
+INSERT INTO matches (winner_id, loser_id) VALUES (1,6);
+INSERT INTO matches (winner_id, loser_id) VALUES (3,5);
+INSERT INTO matches (winner_id, loser_id) VALUES (8,4);
+INSERT INTO matches (winner_id, loser_id) VALUES (7,2);
+---
+INSERT INTO matches (winner_id, loser_id) VALUES (1,8);
+INSERT INTO matches (winner_id, loser_id) VALUES (3,6);
+INSERT INTO matches (winner_id, loser_id) VALUES (7,4);
+INSERT INTO matches (winner_id, loser_id) VALUES (5,2);
 -- End of example VALUES ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
