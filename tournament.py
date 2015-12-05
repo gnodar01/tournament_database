@@ -111,16 +111,26 @@ def swissPairings():
     conn, c = connect()
     SQL = "SELECT player_id, player_name FROM win_loss;"
     c.execute(SQL)
-    rows = []
-    while True:
-        pairing = c.fetchmany(2)
-        if len(pairing) == 0:
-            break
-        rows.append(pairing[0] + pairing[1])
+    # returns list of tuples
+    rows = c.fetchall()
+    pairings = []
+    i = 0
+    j = 1
+    while len(rows) > 0:
+        print rows, i, j
+        player1 = rows[i][0]
+        player2 = rows[j][0]
+        if checkDuplicates(player1, player2):
+            j += 1
+        else:
+            pairings.append( rows.pop(i) + rows.pop(j - 1) )
+            j = 1
+    # print pairings
+    # print rows
     conn.close()
     return rows
 
-def checkDuplicate(player1, player2):
+def checkDuplicates(player1, player2):
     conn, c = connect()
     SQL = """SELECT SUM(num)
                 FROM
@@ -128,12 +138,13 @@ def checkDuplicate(player1, player2):
                         FROM matches
                             WHERE (winner_id = %s AND loser_id = %s)
                                OR (winner_id = %s AND loser_id = %s)
-                    GROUP BY match_id) AS duplicates;"""
+                    GROUP BY match_id)
+                AS duplicates;"""
     data = (player1, player2, player2, player1)
     c.execute(SQL, data)
     row = c.fetchone()
-    if row > 0:
-        raise ValueError("These players have already been matched up")
+    if row[0] != None:
+        return True
+    return False
 
-print checkDuplicate(414,417)
 

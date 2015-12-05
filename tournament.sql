@@ -50,10 +50,10 @@ INSERT INTO matches (winner_id, loser_id) VALUES (1,5);
 INSERT INTO matches (winner_id, loser_id) VALUES (2,3);
 INSERT INTO matches (winner_id, loser_id) VALUES (6,7);
 INSERT INTO matches (winner_id, loser_id) VALUES (4,8);
-INSERT INTO matches (winner_id, loser_id) VALUES (1,2);
-INSERT INTO matches (winner_id, loser_id) VALUES (5,6);
-INSERT INTO matches (winner_id, loser_id) VALUES (3,4);
-INSERT INTO matches (winner_id, loser_id) VALUES (7,8);
+-- INSERT INTO matches (winner_id, loser_id) VALUES (1,2);
+-- INSERT INTO matches (winner_id, loser_id) VALUES (5,6);
+-- INSERT INTO matches (winner_id, loser_id) VALUES (3,4);
+-- INSERT INTO matches (winner_id, loser_id) VALUES (7,8);
 
 -- End of example VALUES ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
