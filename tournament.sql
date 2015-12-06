@@ -31,37 +31,39 @@ CREATE TABLE matches
 
 -- Example VALUES to populate the database with 8 players and 16 matches ++++++++++++++++
 
-INSERT INTO players (player_name) VALUES ('John Hancock');
-INSERT INTO players (player_name) VALUES ('Betty Lu');
-INSERT INTO players (player_name) VALUES ('Don Kong');
-INSERT INTO players (player_name) VALUES ('Bobba Fett');
-INSERT INTO players (player_name) VALUES ('Yan Dan');
-INSERT INTO players (player_name) VALUES ('Kekei Genkai');
-INSERT INTO players (player_name) VALUES ('Tororo Ichiban');
-INSERT INTO players (player_name) VALUES ('Squee McGee');
+-- INSERT INTO players (player_name) VALUES ('John Hancock');
+-- INSERT INTO players (player_name) VALUES ('Betty Lu');
+-- INSERT INTO players (player_name) VALUES ('Don Kong');
+-- INSERT INTO players (player_name) VALUES ('Bobba Fett');
+-- INSERT INTO players (player_name) VALUES ('Yan Dan');
+-- INSERT INTO players (player_name) VALUES ('Kekei Genkai');
+-- INSERT INTO players (player_name) VALUES ('Tororo Ichiban');
+-- INSERT INTO players (player_name) VALUES ('Squee McGee');
 
-INSERT INTO matches (winner_id, loser_id) VALUES (1,2);
-INSERT INTO matches (winner_id, loser_id) VALUES (3,4);
-INSERT INTO matches (winner_id, loser_id) VALUES (5,6);
-INSERT INTO matches (winner_id, loser_id) VALUES (7,8);
-INSERT INTO matches (winner_id, loser_id) VALUES (1,3);
-INSERT INTO matches (winner_id, loser_id) VALUES (5,7);
-INSERT INTO matches (winner_id, loser_id) VALUES (8,2);
-INSERT INTO matches (winner_id, loser_id) VALUES (6,4);
-INSERT INTO matches (winner_id, loser_id) VALUES (1,5);
-INSERT INTO matches (winner_id, loser_id) VALUES (3,8);
-INSERT INTO matches (winner_id, loser_id) VALUES (6,7);
-INSERT INTO matches (winner_id, loser_id) VALUES (4,2);
--- This is where it normally would end---------------------------------------
-INSERT INTO matches (winner_id, loser_id) VALUES (1,6);
-INSERT INTO matches (winner_id, loser_id) VALUES (3,5);
-INSERT INTO matches (winner_id, loser_id) VALUES (8,4);
-INSERT INTO matches (winner_id, loser_id) VALUES (7,2);
----
-INSERT INTO matches (winner_id, loser_id) VALUES (1,8);
-INSERT INTO matches (winner_id, loser_id) VALUES (3,6);
-INSERT INTO matches (winner_id, loser_id) VALUES (7,4);
-INSERT INTO matches (winner_id, loser_id) VALUES (5,2);
+-- INSERT INTO matches (winner_id, loser_id) VALUES (1,2);
+-- INSERT INTO matches (winner_id, loser_id) VALUES (3,4);
+-- INSERT INTO matches (winner_id, loser_id) VALUES (5,6);
+-- INSERT INTO matches (winner_id, loser_id) VALUES (7,8);
+
+-- INSERT INTO matches (winner_id, loser_id) VALUES (1,3);
+-- INSERT INTO matches (winner_id, loser_id) VALUES (5,7);
+-- INSERT INTO matches (winner_id, loser_id) VALUES (8,2);
+-- INSERT INTO matches (winner_id, loser_id) VALUES (6,4);
+
+-- INSERT INTO matches (winner_id, loser_id) VALUES (1,5);
+-- INSERT INTO matches (winner_id, loser_id) VALUES (3,8);
+-- INSERT INTO matches (winner_id, loser_id) VALUES (6,7);
+-- INSERT INTO matches (winner_id, loser_id) VALUES (4,2);
+-- --
+-- INSERT INTO matches (winner_id, loser_id) VALUES (1,6);
+-- INSERT INTO matches (winner_id, loser_id) VALUES (3,5);
+-- INSERT INTO matches (winner_id, loser_id) VALUES (8,4);
+-- INSERT INTO matches (winner_id, loser_id) VALUES (7,2);
+
+-- INSERT INTO matches (winner_id, loser_id) VALUES (1,8);
+-- INSERT INTO matches (winner_id, loser_id) VALUES (3,6);
+-- INSERT INTO matches (winner_id, loser_id) VALUES (7,4);
+-- INSERT INTO matches (winner_id, loser_id) VALUES (5,2);
 -- End of example VALUES ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 

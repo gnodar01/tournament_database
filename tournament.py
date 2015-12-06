@@ -131,10 +131,8 @@ def swissPairings():
         else:
             pairings.append( rows.pop(i) + rows.pop(j - 1) )
             j = 1
-    print pairings
-    print rows
     conn.close()
-    return rows
+    return pairings
 
 def checkDuplicates(player1, player2):
     """Checks if two players have been previously matched.
