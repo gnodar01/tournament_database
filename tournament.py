@@ -99,9 +99,9 @@ def swissPairings():
     """Returns a list of pairs of players for the next round of a match.
 
     Assuming that there are an even number of players registered, each player
-    appears exactly once in the pairings.  Each player is paired with the nearest
-    player with an equal or nearly-equal win record, so long as those two players
-    have not previously been matched together.
+    appears exactly once in the pairings.  Each player is paired with the
+    nearest player with an equal or nearly-equal win record, so long as
+    those two players have not previously been matched together.
 
     Returns:
       A list of tuples, each of which contains (id1, name1, id2, name2)
@@ -121,20 +121,23 @@ def swissPairings():
     i = 0
     j = 1
     while len(rows) > 0:
-        # if j out of index range, no previously unmatched pairing found for player 1
+        # if j out of index range,
+        # no previous unmatched pairing found for player 1
         if j >= len(rows):
-            raise Exception('Cannot assign pairings. ' +
-                            '2 or more players have already been matched together')
+            raise Exception('Cannot assign pairings. 2 or more ' +
+                            'players have already been matched together')
         player1 = rows[i][0]
         player2 = rows[j][0]
-        # if player 1 and player 2 have been matched previously, go to next potential
+        # if player 1 and player 2 have been matched previously,
+        # go to next potential
         if checkDuplicates(player1, player2):
             j += 1
         else:
-            pairings.append( rows.pop(i) + rows.pop(j - 1) )
+            pairings.append(rows.pop(i) + rows.pop(j - 1))
             j = 1
     conn.close()
     return pairings
+
 
 def checkDuplicates(player1, player2):
     """Checks if two players have been previously matched.
@@ -158,5 +161,3 @@ def checkDuplicates(player1, player2):
     if row[0] != None:
         return True
     return False
-
-
