@@ -38,8 +38,8 @@ def countPlayers():
     conn, c = connect()
     SQL = "SELECT COUNT(*) AS num_players FROM players;"
     c.execute(SQL)
-    row = c.fetchone()
-    return row[0]
+    row = c.fetchone()[0]
+    return row
 
 
 def registerPlayer(name):
@@ -116,6 +116,8 @@ def swissPairings():
     # returns list of tuples
     rows = c.fetchall()
     pairings = []
+    if len(rows) % 2 != 0:
+        raise Exception('Cannot assign pairings. Odd number of players.')
     i = 0
     j = 1
     while len(rows) > 0:
