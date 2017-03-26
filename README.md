@@ -1,12 +1,17 @@
 # README
 
-The 'tournament.py' file utilizes [Psycopg2](http://initd.org/psycopg/): "the most popular PostgreSQL database adapter for the Python programming language".
+A backend implementation of a [Swiss-system tournament](https://en.wikipedia.org/wiki/Swiss-system_tournament), utilizing [Psycopg2](http://initd.org/psycopg/).
+
+The `Vagrantfile` and corresponding `pg_config` contain all of the required components for running the tournament database. `tournament.sql` is used to initialize the database. `tournament.py` contains all methods needed to interact with the tournament database. `tournament_test.py` contains 8 tests to ensure everything is running smoothly.
 
 ## Running the tournament database
-- Clone repo
-- Run the 'tournament.sql' file from the terminal of a database server, with PostgreSQL installed, from your OS of choice
-  - All files in this repo were developed and tested on Ubuntu 14.04.3 LTS, running on [VirtualBox (v5.0.10)](https://www.virtualbox.org/wiki/VirtualBox) VM, created and configured through [Vagrant](https://www.vagrantup.com/)
-  - The Vagrant configuration files used can be found [here](https://github.com/udacity/fullstack-nanodegree-vm)
-- If you would like to pre-populate the tournament databse with example values: uncomment the insertions contained in the tournament.sql file, before running
-- 'tournament_test.py' contains a series of 8 tests which run through the functions contained within 'tournament.py'
+- For an identical development environment, install [Vagrant](https://www.vagrantup.com/)
+- Vagrant can run on top of many VMs. For a free option install [VirtualBox](https://www.virtualbox.org/wiki/VirtualBox).
+- `cd` into the project directory
+- Initialize Vagrant with `vagrant up`
+- SSH into Vagrant with `vagrant ssh`
+- From within the VM `cd` into the shared directory: `cd /vagrant`
+- Initialize the database: `psql -f tournament.sql`
+- Run the tests: `python tournament_test.py`. All 8 tests should pass.
   - WARNING: Running these tests will delete any records already populated within the database
+- If you would like to pre-populate the tournament database with example values: uncomment the insertions contained in the tournament.sql file, before running
